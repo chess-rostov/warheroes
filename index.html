@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+
+body {
+    background: white;
+    text-align: center;
+}
+
+#mesto {
+    width: 50%;
+    display: inline-block;
+}
+
+#inputLocation,
+#inputSituation,
+#inputProfessional{
+    width: 100%;
+}
+
+</style>
+<script type="text/javascript" defer="" src="https://yandex.st/jquery/1.9.1/jquery.min.js"></script>
+<script>
+var timerValue = 2000;
+var data = '';
+
+function oclick(){
+    console.log("oclick");
+    location.reload();
+}
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function myRun(){
+    console.log("myRun");
+    let num = '';
+    let val = '';
+    
+    myfunc();
+}
+
+function getNewUrl(){
+    console.log("getNewUrl");
+    let num = getRandomInt(1200);
+    let part = "https://warheroes.ru/hero/hero.asp?Hero_id=";
+    let url = part + num;
+    console.log("url = " + url);
+    return url;
+}
+
+function getNewUrlVk(){
+    console.log("getNewUrlVk");
+    let num = getRandomInt(1200);
+    let part = "https://vk.com/id";
+    let url = part + num;
+    console.log("url = " + url);
+    console.log("url = " + url + "#page_avatar_img");
+    return url;
+}
+
+function myfunc() {
+    console.log("myfunc");
+    let num = getRandomInt(1200);
+    let part = "https://warheroes.ru/hero/hero.asp?Hero_id=";
+    let url = part + num;
+    console.log("url = " + url);
+    /*location.assign(url);*/
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/*$.get(getNewUrlVk(), {text: 'Текст'}, function(data){
+	alert(data);
+});*/
+
+function mySuccess(data){
+    console.log("mySuccess");
+    //$("#divPhoto").innerHTML=data;
+}
+
+async function myslider(){
+    console.log('myslider');
+    data = '';
+    let isRun = true;
+    
+    if(isRun){
+        while (true){
+            if(isRun){
+                await sleep(timerValue);
+                console.log(getNewUrlVk());
+                //location.assign(getNewUrlVk());
+                //$.get(getNewUrlVk(), {}, );
+                $.ajax({
+                    url: getNewUrlVk(),
+                    method: 'get',
+                    dataType: 'html',
+                    data: {}, 
+                    success: mySuccess(data)
+                });
+                
+            }else{
+                break;
+            }
+        }
+    }
+
+}
+
+
+
+</script>
+</head>
+<body>
+<div id="mesto">
+    <button id="btnUpload();" onclick="oclick();">обновить</button>
+    <div id="divPhoto"></div>
+    <!--<p>
+        <label>Локация: </label>
+        <input id="inputLocation" value="локация"></input>
+    </p>
+    <p>
+        <label>Профессия: </label>
+        <input id="inputProfessional" value="профессия"></input>
+    </p>
+    <p>
+        <label>Ситуация: </label>
+        <input id="inputSituation" value="ситуация"></input>
+    </p>-->
+</div>
+
+</body>
+<style>
+    
+</style>
+<script>
+    
+    myslider();
+    //myRun();
+</script>
+</html>
